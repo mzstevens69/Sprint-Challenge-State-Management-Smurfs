@@ -3,8 +3,28 @@ import { connect } from 'react-redux';
 import { getSmurf, postSmurf } from '../actions';
 import { SmurfCard } from './SmurfCard';
 import Loader from "react-loader-spinner";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    button: {
+        margin: 20
+    },
+    title: {
+        color: '#0d47a1'
+    },
+    input: {
+        background: '#bbdefb',
+        height: 25,
+        fontSize: 25
+    
+    }
+    
+})
 
 const SmurfForm = props => {
+
+    const classes = useStyles();
 
     const [smurf, setSmurf] = useState({
         name: '',
@@ -28,8 +48,8 @@ const SmurfForm = props => {
         <div className='card-wrapper'>
         <div className='input-card'>
             <form>
-                <h3>Name:</h3>
-                <input
+                <h3 className={classes.title} >Name:</h3>
+                <input className={classes.input}
                     id='name'
                     type='text'
                     name='name'
@@ -37,8 +57,8 @@ const SmurfForm = props => {
                     onChange={changeHandler}
                     placeholder='name'
                 />
-                <h3>Age:</h3>
-                <input
+                <h3 className={classes.title} >Age:</h3>
+                <input className={classes.input}
                     id='age'
                     type='text'
                     name='age'
@@ -46,8 +66,8 @@ const SmurfForm = props => {
                     onChange={changeHandler}
                     placeholder='age in years'
                 />
-                <h3>Height:</h3>
-                <input
+                <h3 className={classes.title} >Height:</h3>
+                <input className={classes.input}
                     id='height'
                     type='text'
                     name='height'
@@ -56,11 +76,11 @@ const SmurfForm = props => {
                     placeholder='height in cm'
                 />
                 <br/>
-                <button type='submit'onClick={(e) => submitHandler(e)}>Add Smurf</button>
+                <Button className={classes.button} size='lg' variant='contained' color='primary' type='submit'onClick={(e) => submitHandler(e)}>Add Smurf</Button>
                 
             </form>
         </div>
-            <button onClick={() => props.getSmurf()}>Get Smmmmuuurrrffffs</button>
+            <Button color='primary' size='lg' variant='contained' onClick={() => props.getSmurf()}>Get Smmmmuuurrrffffs</Button>
             {props.isFetching && (
                 <Loader type="Puff" color="blue" height={80} width={80} />
             )}
